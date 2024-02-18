@@ -1,8 +1,11 @@
 package commandsHandler.commands;
 
+import edu.java.bot.service.UserService;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import edu.java.bot.service.linksHandler.links.GitHubLink;
 import edu.java.bot.service.linksHandler.links.StackOverFlowLink;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,25 +13,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import edu.java.bot.service.UserService;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import java.util.ArrayList;
-import java.util.List;
 import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class ListHandlerTest {
-    @Mock
-    private UserService userService;
     @InjectMocks
     ListHandler listHandler;
-
     @Mock
     Update update;
+    @Mock
+    private UserService userService;
 
     @BeforeEach
     void init() {

@@ -1,12 +1,12 @@
 package edu.java.bot.service;
 
+import edu.java.bot.repository.UserRepository;
 import edu.java.bot.service.linksHandler.links.Link;
 import edu.java.bot.utils.User;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import edu.java.bot.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor

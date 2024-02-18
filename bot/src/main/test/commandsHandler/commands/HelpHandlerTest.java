@@ -10,6 +10,7 @@ import edu.java.bot.service.commandsHandler.commands.UntrackHandler;
 import edu.java.bot.service.linksHandler.LinksHandler;
 import edu.java.bot.service.linksHandler.parsers.GitHubLinkParser;
 import edu.java.bot.service.linksHandler.parsers.StackOverFlowLinkParser;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,18 +21,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import java.util.List;
 import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 public class HelpHandlerTest {
-    @Mock
-    private UserService userService;
-
     HelpHandler helpHandler;
-
     @Mock
     Update update;
+    @Mock
+    private UserService userService;
 
     @BeforeEach
     void init() {

@@ -1,10 +1,10 @@
 package edu.java.bot.service.commandsHandler.commands;
 
+import edu.java.bot.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import edu.java.bot.service.UserService;
 
 @Component
 @AllArgsConstructor

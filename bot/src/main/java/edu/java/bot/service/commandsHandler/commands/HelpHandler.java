@@ -1,11 +1,11 @@
 package edu.java.bot.service.commandsHandler.commands;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import java.util.List;
 
 @Component
 @AllArgsConstructor

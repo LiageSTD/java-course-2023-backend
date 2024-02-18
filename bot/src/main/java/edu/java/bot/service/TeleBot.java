@@ -4,6 +4,7 @@ import edu.java.bot.configuration.ApplicationConfig;
 import edu.java.bot.service.commandsHandler.CommandsHandler;
 import edu.java.bot.service.commandsHandler.commands.Command;
 import edu.java.bot.service.commandsHandler.commands.SupportedCommand;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -11,11 +12,14 @@ import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import java.util.List;
 
 @Slf4j
 @Component
 public class TeleBot extends TelegramLongPollingBot {
+
+    private final ApplicationConfig applicationConfig;
+    private final CommandsHandler commandsHandler;
+    List<SupportedCommand> commands;
 
     public TeleBot(
         ApplicationConfig applicationConfig,
@@ -28,10 +32,6 @@ public class TeleBot extends TelegramLongPollingBot {
 
         addCommandsToMenu();
     }
-
-    private final ApplicationConfig applicationConfig;
-    private final CommandsHandler commandsHandler;
-    List<SupportedCommand> commands;
 
     @Override
     public void onUpdateReceived(Update update) {

@@ -2,10 +2,10 @@ package edu.java.bot.service.linksHandler;
 
 import edu.java.bot.service.linksHandler.links.Link;
 import edu.java.bot.service.linksHandler.parsers.LinkParser;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Slf4j
 @Service

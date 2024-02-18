@@ -1,11 +1,11 @@
 package edu.java.bot.service.commandsHandler.filters;
 
+import edu.java.bot.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import edu.java.bot.service.UserService;
 
 @Component
 @Slf4j

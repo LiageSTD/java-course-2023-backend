@@ -15,15 +15,19 @@ public class User {
     public void updateLinks(List<Link> arrToAdd) {
         linksToTrack.addAll(arrToAdd);
     }
+
     public void updateLinks(Link link) {
         linksToTrack.add(link);
     }
+
     public void removeLinks(List<Link> arrToAdd) {
         linksToTrack.removeAll(arrToAdd);
     }
+
     public void removeLinks(Link link) {
         linksToTrack.remove(link);
     }
+
     public String getAllLinks() {
         StringBuilder st = new StringBuilder();
         for (Link el : linksToTrack) {
@@ -31,6 +35,5 @@ public class User {
         }
         return !st.isEmpty() ? st.toString() : "You don't have any links to track";
     }
-
 
 }

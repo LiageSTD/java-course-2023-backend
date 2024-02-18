@@ -5,9 +5,9 @@ import edu.java.bot.service.linksHandler.links.GitHubLink;
 import edu.java.bot.service.linksHandler.links.StackOverFlowLink;
 import edu.java.bot.service.linksHandler.parsers.GitHubLinkParser;
 import edu.java.bot.service.linksHandler.parsers.StackOverFlowLinkParser;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
 class LinksHandlerTest {
     LinksHandler linksHandler = new LinksHandler(List.of(new GitHubLinkParser(), new StackOverFlowLinkParser()));
@@ -15,8 +15,10 @@ class LinksHandlerTest {
     @Test
     void parseGithubLinkTest() {
         String link = "/track https://github.com/pengrad/java-telegram-bot-api";
-        Assertions.assertEquals(linksHandler.checkLink(link),
-            new GitHubLink("github.com", "/pengrad/java-telegram-bot-api"));
+        Assertions.assertEquals(
+            linksHandler.checkLink(link),
+            new GitHubLink("github.com", "/pengrad/java-telegram-bot-api")
+        );
     }
 
     @Test
@@ -28,8 +30,10 @@ class LinksHandlerTest {
     @Test
     void parseStackOverFlowLinkTest() {
         String link = "/track https://stackoverflow.com/questions/2230676/how-to-check-for-a-valid-url-in-java";
-        Assertions.assertEquals(linksHandler.checkLink(link),
-            new StackOverFlowLink("stackoverflow.com", "/questions/2230676/how-to-check-for-a-valid-url-in-java"));
+        Assertions.assertEquals(
+            linksHandler.checkLink(link),
+            new StackOverFlowLink("stackoverflow.com", "/questions/2230676/how-to-check-for-a-valid-url-in-java")
+        );
     }
 
     @Test

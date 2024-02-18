@@ -2,10 +2,10 @@ package edu.java.bot.repository;
 
 import edu.java.bot.service.linksHandler.links.GitHubLink;
 import edu.java.bot.utils.User;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class UserRepositoryTest {
     Long id = 123L;
