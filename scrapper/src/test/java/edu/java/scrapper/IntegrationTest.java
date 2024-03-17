@@ -16,7 +16,6 @@ public abstract class IntegrationTest {
             .withUsername("postgres")
             .withPassword("postgres");
         POSTGRES.start();
-
         runMigrations(POSTGRES);
     }
 
