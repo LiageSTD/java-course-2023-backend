@@ -33,7 +33,7 @@ public class ListHandler implements SupportedCommand {
         sb.append(lolCodeStyleError);
         int counter = 1;
         for (Link link : userService.getUserLinks(id)) {
-            sb.append(counter++).append(". ").append("https://").append(link.host()).append(link.path()).append("\n");
+            sb.append(counter++).append(". ").append("https://").append(link.getHost()).append(link.getPath()).append("\n");
         }
         if (sb.length() == lolCodeStyleError.length()) {
             reply.setText("There's no links to show :(");

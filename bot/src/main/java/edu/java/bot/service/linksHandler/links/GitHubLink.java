@@ -2,12 +2,12 @@ package edu.java.bot.service.linksHandler.links;
 
 public record GitHubLink(String host, String path) implements Link {
     @Override
-    public String host() {
+    public String getHost() {
         return host;
     }
 
     @Override
-    public String path() {
+    public String getPath() {
         return path;
     }
 }

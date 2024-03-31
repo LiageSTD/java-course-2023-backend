@@ -31,7 +31,7 @@ public class User {
     public String getAllLinks() {
         StringBuilder st = new StringBuilder();
         for (Link el : linksToTrack) {
-            st.append(el.host()).append(el.path()).append("\n");
+            st.append(el.getHost()).append(el.getPath()).append("\n");
         }
         return !st.isEmpty() ? st.toString() : "You don't have any links to track";
     }
