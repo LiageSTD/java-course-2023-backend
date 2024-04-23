@@ -1,8 +1,8 @@
 package edu.java.dto.scrapper.response;
 
+import java.net.URI;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import java.net.URI;
 
 @Getter
 @AllArgsConstructor

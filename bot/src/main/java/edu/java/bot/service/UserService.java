@@ -5,11 +5,11 @@ import edu.java.bot.service.linksHandler.links.Link;
 import edu.java.bot.utils.User;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
