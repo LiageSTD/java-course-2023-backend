@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeset liage:02
-CREATE TABLE IF NOT EXISTS links
+CREATE TABLE IF NOT EXISTS link
 (
     id
     BIGSERIAL

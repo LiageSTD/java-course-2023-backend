@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface UsersDao {
     boolean add(User user);
-    void remove(User user);
-    boolean update(User user, User newUser);
-    List<@NotNull User> getAll();
 
+    void remove(User user);
+
+    boolean update(User user, User newUser);
+
+    List<@NotNull User> getAll();
 }

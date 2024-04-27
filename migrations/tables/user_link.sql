@@ -1,20 +1,20 @@
 --liquibase formatted sql
 
 --changeset liage:03
-CREATE TABLE IF NOT EXISTS users_links
+CREATE TABLE IF NOT EXISTS user_link
 (
-    chat_id BIGINT REFERENCES users
-(
-    id
-),
+    chat_id BIGINT REFERENCES chat
+        (
+         id
+            ),
 
-    link_id BIGINT REFERENCES links
-(
-    id
-),
+    link_id BIGINT REFERENCES link
+        (
+         id
+            ),
     CONSTRAINT users_links_pk PRIMARY KEY
-(
-    chat_id,
-    link_id
-)
-    );
+        (
+         chat_id,
+         link_id
+            )
+);
