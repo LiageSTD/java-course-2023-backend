@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class JdbcLinkService implements LinkService {
+
     private final LinksDao linksDao;
     private final UsersLinksDao usersLinksDao;
 

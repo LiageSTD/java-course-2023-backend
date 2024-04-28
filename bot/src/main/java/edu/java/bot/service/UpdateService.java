@@ -15,7 +15,7 @@ public class UpdateService {
 
     public void sendUpdate(LinkUpdateRequest update) {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(update.getUrl() + ": " + update.getDescription());
+        sendMessage.setText(update.getUrl() + "-> " + update.getDescription());
         for (long id : update.getTgChatIds()) {
             sendMessage.setChatId(String.valueOf(id));
             try {

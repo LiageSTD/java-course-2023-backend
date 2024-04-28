@@ -116,7 +116,7 @@ public class LinkUpdaterService implements LinkUpdater {
         for (EventsResponse event : events) {
             if (event != null) {
                 if (event.getCreatedAt().isAfter(link.getUpdatedAt())) {
-                    String description = "New Activity: " + event.getEventType();
+                    String description = "New activity: " + event.getEventType();
                     sendNotification(
                         link,
                         description

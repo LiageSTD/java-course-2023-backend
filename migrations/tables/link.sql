@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS link
             NULL
         UNIQUE,
     updated_at
-        TIMESTAMPTZ
+        timestamp WITH TIME ZONE
         NOT
             NULL,
     unable_to_update

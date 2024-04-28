@@ -8,6 +8,6 @@
                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <include file="tables/link.sql"/>
-    <include file="tables/user.sql"/>
-    <include file="tables/user_link.sql"/>
+    <include file="tables/chat.sql"/>
+    <include file="tables/chat_link.sql"/>
 </databaseChangeLog>
