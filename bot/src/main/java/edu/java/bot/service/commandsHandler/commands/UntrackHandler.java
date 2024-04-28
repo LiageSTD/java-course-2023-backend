@@ -1,6 +1,6 @@
 package edu.java.bot.service.commandsHandler.commands;
 
-import edu.java.bot.service.UserService;
+import edu.java.bot.service.BotService;
 import edu.java.bot.service.linksHandler.LinksHandler;
 import edu.java.bot.service.linksHandler.links.Link;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @AllArgsConstructor
 public class UntrackHandler implements SupportedCommand {
 
-    private final UserService userService;
+    private final BotService botService;
     private final LinksHandler linksHandler;
 
     @Override
@@ -37,7 +37,8 @@ public class UntrackHandler implements SupportedCommand {
         if (link == null) {
             reply.setText("Incorrect link");
         } else {
-            userService.removeLinkFromAUser(id, link);
+            String linkToSend = update.getMessage().getText().replace("/untrack ", "");
+            botService.removeLink(id, linkToSend);
             reply.setText("Link has been removed");
         }
         return reply;

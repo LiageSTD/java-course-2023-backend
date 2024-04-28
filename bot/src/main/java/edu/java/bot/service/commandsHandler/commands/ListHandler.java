@@ -1,7 +1,6 @@
 package edu.java.bot.service.commandsHandler.commands;
 
-import edu.java.bot.service.UserService;
-import edu.java.bot.service.linksHandler.links.Link;
+import edu.java.bot.service.BotService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @AllArgsConstructor
 public class ListHandler implements SupportedCommand {
 
-    private final UserService userService;
+    private final BotService botService;
 
     @Override
     public String command() {
@@ -32,8 +31,9 @@ public class ListHandler implements SupportedCommand {
         String lolCodeStyleError = "List of your tracked links:\n";
         sb.append(lolCodeStyleError);
         int counter = 1;
-        for (Link link : userService.getUserLinks(id)) {
-            sb.append(counter++).append(". ").append("https://").append(link.host()).append(link.path()).append("\n");
+        for (String link : botService.getLinks(id)) {
+            sb.append(counter++).append(". ").append(link)
+                .append("\n");
         }
         if (sb.length() == lolCodeStyleError.length()) {
             reply.setText("There's no links to show :(");
