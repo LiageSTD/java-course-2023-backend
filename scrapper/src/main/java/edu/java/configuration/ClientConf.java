@@ -18,6 +18,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @EnableScheduling
 public class ClientConf {
     private static ApplicationConfig applicationConfig;
+
     @Autowired
     public ClientConf(ApplicationConfig applicationConfig) {
         ClientConf.applicationConfig = applicationConfig;
