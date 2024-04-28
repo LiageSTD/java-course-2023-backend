@@ -10,7 +10,8 @@ import org.springframework.validation.annotation.Validated;
 
 public record ApplicationConfig(
 
-    @NotNull Scheduler scheduler) {
+    @NotNull Scheduler scheduler,
+    @NotNull Integer webClientMaxInMemorySize) {
     @Bean public Scheduler scheduler() {
         return scheduler;
     }

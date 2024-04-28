@@ -6,7 +6,7 @@ import edu.java.client.github.dto.EventsResponse;
 import edu.java.client.stackoverflow.StackOverFlowClient;
 import edu.java.client.stackoverflow.dto.QuestionEventResponse;
 import edu.java.configuration.ApplicationConfig;
-import edu.java.dto.bot.request.LinkUpdate;
+import edu.java.dto.bot.request.LinkUpdateRequest;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
 import java.net.URI;
@@ -138,11 +138,12 @@ public class JdbcLinkUpdater implements LinkUpdater {
     }
 
     private void sendNotification(Link link, String message) {
-        botClient.sendUpdate(new LinkUpdate(
+        LinkUpdateRequest linkUpdateRequest = new LinkUpdateRequest(
             link.getId(),
             link.getUrl(),
             message,
             chatService.getUsersByLink(link.getId())
-        ));
+        );
+        botClient.sendUpdate(linkUpdateRequest);
     }
 }

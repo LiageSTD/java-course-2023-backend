@@ -6,6 +6,7 @@ import edu.java.client.stackoverflow.StackOverFlowClient;
 import edu.java.configuration.apiConfs.BotClientConf;
 import edu.java.configuration.apiConfs.GithubApiConf;
 import edu.java.configuration.apiConfs.StackOverFlowApiConf;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,9 +17,15 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 @EnableScheduling
 public class ClientConf {
+    private static ApplicationConfig applicationConfig;
+    @Autowired
+    public ClientConf(ApplicationConfig applicationConfig) {
+        ClientConf.applicationConfig = applicationConfig;
+    }
+
     public static WebClient makeClient(String url, String jsonCT, String apiVer) {
         return WebClient.builder()
-            .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(16 * 1024 * 1024))
+            .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(applicationConfig.webClientMaxInMemorySize()))
             .baseUrl(url)
             .defaultHeader("Content-Type", jsonCT)
             .defaultHeader("Accept", apiVer)

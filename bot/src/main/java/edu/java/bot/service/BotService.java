@@ -4,8 +4,8 @@ import edu.java.bot.client.scrapper.ScrapperClient;
 import edu.java.dto.scrapper.request.AddLinkRequest;
 import edu.java.dto.scrapper.request.RemoveLinkRequest;
 import edu.java.dto.scrapper.response.LinkResponse;
-import java.util.Collection;
 import jakarta.validation.constraints.NotNull;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

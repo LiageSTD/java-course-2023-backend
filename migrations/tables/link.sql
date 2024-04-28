@@ -4,18 +4,18 @@
 CREATE TABLE IF NOT EXISTS link
 (
     id
-    BIGSERIAL
-    PRIMARY
-    KEY,
+        BIGSERIAL
+        PRIMARY
+            KEY,
     url
-    TEXT
-    NOT
-    NULL
-    UNIQUE,
+        TEXT
+        NOT
+            NULL
+        UNIQUE,
     updated_at
-    TIMESTAMPTZ
-    NOT
-    NULL,
+        TIMESTAMPTZ
+        NOT
+            NULL,
     unable_to_update
-    BOOLEAN
+        BOOLEAN
 );

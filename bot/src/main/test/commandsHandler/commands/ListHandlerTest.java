@@ -2,10 +2,7 @@ package commandsHandler.commands;
 
 import edu.java.bot.service.BotService;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
-import edu.java.bot.service.linksHandler.links.GitHubLink;
-import edu.java.bot.service.linksHandler.links.StackOverFlowLink;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,9 +49,10 @@ class ListHandlerTest {
     void TestSomeHandle() {
         Mockito.when(userService.getLinks(1L))
             .thenReturn(List.of(
-            "github.com/somePath",
-            "stackoverflow.com/somePath")
-        );
+                    "github.com/somePath",
+                    "stackoverflow.com/somePath"
+                )
+            );
         Assertions.assertEquals(
             listHandler.handle(update).getText(),
             """

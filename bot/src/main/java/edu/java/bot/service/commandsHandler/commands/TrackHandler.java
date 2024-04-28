@@ -38,7 +38,7 @@ public class TrackHandler implements SupportedCommand {
             reply.setText("Incorrect link");
         } else {
             reply.setText("Link has been added");
-            String linkToSend = update.getMessage().getText().replace("/track ","");
+            String linkToSend = update.getMessage().getText().replace("/track ", "");
             log.info("Link has been added " + linkToSend);
             botService.addLink(id, linkToSend);
         }
