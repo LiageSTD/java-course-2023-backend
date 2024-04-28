@@ -1,10 +1,11 @@
 package commandsHandler.commands;
 
-import edu.java.bot.service.UserService;
+import edu.java.bot.service.BotService;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import edu.java.bot.service.linksHandler.links.GitHubLink;
 import edu.java.bot.service.linksHandler.links.StackOverFlowLink;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ class ListHandlerTest {
     @Mock
     Update update;
     @Mock
-    private UserService userService;
+    private BotService userService;
 
     @BeforeEach
     void init() {
@@ -38,7 +39,7 @@ class ListHandlerTest {
 
     @Test
     void TestNullHandle() {
-        Mockito.when(userService.getUserLinks(1L)).thenReturn(new ArrayList<>());
+        Mockito.when(userService.getLinks(1L)).thenReturn(new ArrayList<>());
         SendMessage reply = listHandler.handle(update);
         Assertions.assertEquals(
             listHandler.handle(update).getText(), "There's no links to show :(");
@@ -49,10 +50,11 @@ class ListHandlerTest {
 
     @Test
     void TestSomeHandle() {
-        Mockito.when(userService.getUserLinks(1L)).thenReturn(List.of(
-            new GitHubLink("github.com", "/somePath"),
-            new StackOverFlowLink("stackoverflow.com", "/somePath")
-        ));
+        Mockito.when(userService.getLinks(1L))
+            .thenReturn(List.of(
+            "github.com/somePath",
+            "stackoverflow.com/somePath")
+        );
         Assertions.assertEquals(
             listHandler.handle(update).getText(),
             """

@@ -16,25 +16,25 @@ import org.springframework.stereotype.Repository;
         return
             jdbcTemplate
                 .update(
-                    "INSERT INTO user_link (chat_id, link_id) VALUES (?, ?)", user.getId(), link.getId()
+                    "INSERT INTO chat_link (chat_id, link_id) VALUES (?, ?)", user.getId(), link.getId()
                 ) > 0;
     }
 
     @Override public void remove(User chat, Link link) {
-        jdbcTemplate.update("DELETE FROM user_link WHERE chat_id = ? AND link_id = ?", chat.getId(), link.getId());
+        jdbcTemplate.update("DELETE FROM chat_link WHERE chat_id = ? AND link_id = ?", chat.getId(), link.getId());
     }
 
     @Override public void removeByChat(User chat) {
-        jdbcTemplate.update("DELETE FROM user_link WHERE chat_id = ?", chat.getId());
+        jdbcTemplate.update("DELETE FROM chat_link WHERE chat_id = ?", chat.getId());
     }
 
     @Override public void removeByLink(Link link) {
-        jdbcTemplate.update("DELETE FROM user_link WHERE link_id = ?", link.getId());
+        jdbcTemplate.update("DELETE FROM chat_link WHERE link_id = ?", link.getId());
     }
 
     @Override public List<Link> findAllByUserId(User user) {
         return jdbcTemplate.query(
-            "SELECT * FROM link WHERE id IN (SELECT link_id FROM user_link WHERE chat_id = ?)",
+            "SELECT * FROM link WHERE id IN (SELECT link_id FROM chat_link WHERE chat_id = ?)",
             (rs, rowNum) -> new Link(
                 rs.getLong("id"),
                 rs.getString("url"),
@@ -45,8 +45,8 @@ import org.springframework.stereotype.Repository;
         );
     }
 
-    @Override public long[] getUsersByLink(long linkId) {
-        return jdbcTemplate.queryForList("SELECT chat_id FROM user_link WHERE link_id = ?", Long.class, linkId).stream()
+    @Override public long[] getUserIdsByLink(long linkId) {
+        return jdbcTemplate.queryForList("SELECT chat_id FROM chat_link WHERE link_id = ?", Long.class, linkId).stream()
             .mapToLong(Long::longValue).toArray();
     }
 }

@@ -23,4 +23,6 @@ public interface LinksDao {
     @Nullable List<Link> findUnupdatable();
 
     @Nullable Collection<Link> listAllByTime(@NotNull OffsetDateTime updatedAt);
+
+    boolean exists(@NotNull Link link);
 }

@@ -42,6 +42,11 @@ public class JdbcChatService implements ChatService {
 
     @Override
     public long[] getUsersByLink(long linkId) {
-        return usersLinksDao.getUsersByLink(linkId);
+        return usersLinksDao.getUserIdsByLink(linkId);
+    }
+
+    @Override
+    public boolean exists(Long chatId) {
+        return usersDao.exists(new User(chatId));
     }
 }

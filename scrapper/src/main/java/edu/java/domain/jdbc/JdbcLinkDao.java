@@ -56,16 +56,12 @@ public class JdbcLinkDao implements LinksDao {
 
     @Override
     public Link findByUrl(String url) {
-        return jdbcTemplate.queryForObject(
-            "SELECT * FROM link WHERE url = ?",
-            (rs, rowNum) -> new Link(
-                rs.getLong("id"),
-                rs.getString("url"),
-                rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
-                rs.getBoolean("unable_to_update")
-            ),
-            url
-        );
+        return jdbcTemplate.queryForObject("SELECT * FROM link WHERE url = ?", (rs, rowNum) -> new Link(
+            rs.getLong("id"),
+            rs.getString("url"),
+            rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
+            rs.getBoolean("unable_to_update")
+        ), url);
     }
 
     @Override
@@ -92,7 +88,7 @@ public class JdbcLinkDao implements LinksDao {
     @Override
     public Collection<Link> listAllByTime(OffsetDateTime updatedAt) {
         return jdbcTemplate.query(
-            "SELECT * FROM link WHERE updated_at = ?",
+            "SELECT * FROM link WHERE updated_at < ?",
             (rs, rowNum) -> new Link(
                 rs.getLong("id"),
                 rs.getString("url"),
@@ -101,5 +97,11 @@ public class JdbcLinkDao implements LinksDao {
             ),
             updatedAt
         );
+    }
+
+    @Override
+    public boolean exists(Link link) {
+        Long count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM link WHERE url = ?", Long.class, link.getUrl());
+        return count != null && count > 0;
     }
 }

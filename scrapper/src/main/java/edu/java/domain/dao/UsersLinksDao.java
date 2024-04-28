@@ -16,5 +16,5 @@ public interface UsersLinksDao {
 
     List<Link> findAllByUserId(@NotNull User user);
 
-    long[] getUsersByLink(long linkId);
+    long[] getUserIdsByLink(long linkId);
 }

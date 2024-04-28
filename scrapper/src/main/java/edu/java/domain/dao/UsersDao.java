@@ -12,4 +12,6 @@ public interface UsersDao {
     boolean update(User user, User newUser);
 
     List<@NotNull User> getAll();
+
+    boolean exists(User user);
 }

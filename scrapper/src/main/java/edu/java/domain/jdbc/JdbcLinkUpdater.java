@@ -32,6 +32,7 @@ public class JdbcLinkUpdater implements LinkUpdater {
 
     @Override
     public int update() {
+        log.info("Updating links in updater");
         Collection<Link> unUpdatedLinks =
             linkService.listAllByTime(OffsetDateTime.now().minus(applicationConfig.getUpdateInterval()));
         long amountOfUpdatedLinks = 0;
@@ -98,9 +99,8 @@ public class JdbcLinkUpdater implements LinkUpdater {
             URI uri = new URI(link.getUrl());
             String path = uri.getPath();
             String[] parts = path.split("/");
-            owner = parts[0];
-            repo = parts[1];
-
+            owner = parts[1];
+            repo = parts[2];
         } catch (URISyntaxException e) {
             log.error("Malformed URL: {}", link.getUrl());
             processUnupdatableLink(link);

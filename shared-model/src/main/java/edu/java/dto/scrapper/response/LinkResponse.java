@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class LinkResponse {
-    int id;
+    long id;
     String url;
 }

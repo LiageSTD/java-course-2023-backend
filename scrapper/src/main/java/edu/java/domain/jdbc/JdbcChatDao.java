@@ -35,4 +35,11 @@ public class JdbcChatDao implements UsersDao {
         return jdbcTemplate.query("SELECT * FROM chat", (rs, rowNum) -> new User(rs.getLong("id")));
     }
 
+    @Override
+    public boolean exists(User user) {
+        return !jdbcTemplate.query(
+            "SELECT * FROM chat WHERE id = ?", (rs, rowNum) -> new User(rs.getLong("id")), user.id
+        ).isEmpty();
+    }
+
 }

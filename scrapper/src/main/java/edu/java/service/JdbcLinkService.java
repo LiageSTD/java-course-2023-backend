@@ -21,27 +21,27 @@ public class JdbcLinkService implements LinkService {
 
     @Override
     public Link add(User user, Link link) {
-        Link linkInDb = linksDao.findByUrl(link.getUrl());
-        if (linkInDb == null) {
-            Link newLink = new Link(linksDao.add(link), link.getUrl(), link.getUpdatedAt(), link.isUnableToUpdate());
-            usersLinksDao.add(user, newLink);
-            return newLink;
-        } else {
+        if (linksDao.exists(link)) {
+            Link linkInDb = linksDao.findByUrl(link.getUrl());
             usersLinksDao.add(user, linkInDb);
             return linkInDb;
+        } else {
+            link.setId(linksDao.add(link));
+            usersLinksDao.add(user, link);
+            return link;
         }
     }
 
     @Override
     public Link remove(User user, Link link) {
-        Link linkInDb = linksDao.findById(link.getId());
-        if (linkInDb != null) {
-            linksDao.remove(linkInDb);
+        if (linksDao.exists(link)) {
+            Link linkInDb = linksDao.findByUrl(link.getUrl());
             usersLinksDao.remove(user, linkInDb);
-            return linkInDb;
-        } else {
-            throw new IllegalArgumentException("Link not found");
+            if (usersLinksDao.getUserIdsByLink(link.getId()).length == 0) {
+                linksDao.remove(linkInDb);
+            }
         }
+        return link;
     }
 
     @Override

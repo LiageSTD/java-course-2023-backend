@@ -55,13 +55,32 @@ public abstract class EventsResponse implements Serializable {
 
     @JsonProperty("id") protected String id;
 
+    @JsonProperty("type") protected String eventType;
+
     @JsonProperty("created_at") protected OffsetDateTime createdAt;
+
+    public static class Push extends EventsResponse {
+        @JsonProperty("payload") private Payload payload;
+
+        public class Payload {
+            @JsonProperty("size") private int size;
+        }
+
+    }
 
     public static class PullRequest extends EventsResponse {
         @JsonProperty("payload") private Payload payload;
 
         public class Payload {
             @JsonProperty("action") private String action;
+        }
+    }
+
+    public static class CreateEvent extends EventsResponse {
+        @JsonProperty("payload") private Payload payload;
+
+        public class Payload {
+            @JsonProperty("ref") private String ref;
         }
     }
 

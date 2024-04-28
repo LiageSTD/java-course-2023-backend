@@ -13,4 +13,6 @@ public interface ChatService {
     List<User> getAll();
 
     long[] getUsersByLink(long linkId);
+
+    boolean exists(Long chatId);
 }

@@ -18,6 +18,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class ClientConf {
     public static WebClient makeClient(String url, String jsonCT, String apiVer) {
         return WebClient.builder()
+            .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(16 * 1024 * 1024))
             .baseUrl(url)
             .defaultHeader("Content-Type", jsonCT)
             .defaultHeader("Accept", apiVer)
