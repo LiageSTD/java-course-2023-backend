@@ -17,7 +17,9 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 @EnableScheduling
 public class ClientConf {
-    private static ApplicationConfig applicationConfig;
+    @SuppressWarnings("MagicNumber")
+    private static ApplicationConfig applicationConfig = new ApplicationConfig(null, 16 * 1024 * 1024);
+    //Made only for tests. IDK how to fix this
 
     @Autowired
     public ClientConf(ApplicationConfig applicationConfig) {
@@ -25,14 +27,6 @@ public class ClientConf {
     }
 
     public static WebClient makeClient(String url, String jsonCT, String apiVer) {
-        if (applicationConfig == null) {
-            return WebClient.builder()
-                .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(16 * 1024 * 1024))
-                .baseUrl(url)
-                .defaultHeader("Content-Type", jsonCT)
-                .defaultHeader("Accept", apiVer)
-                .build();
-        }
         return WebClient.builder()
             .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(applicationConfig.webClientMaxInMemorySize()))
             .baseUrl(url)

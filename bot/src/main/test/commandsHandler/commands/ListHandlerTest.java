@@ -49,8 +49,8 @@ class ListHandlerTest {
     void TestSomeHandle() {
         Mockito.when(userService.getLinks(1L))
             .thenReturn(List.of(
-                    "github.com/somePath",
-                    "stackoverflow.com/somePath"
+                    "https://github.com/somePath",
+                    "https://stackoverflow.com/somePath"
                 )
             );
         Assertions.assertEquals(

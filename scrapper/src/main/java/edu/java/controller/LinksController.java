@@ -14,7 +14,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import java.net.URI;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@SuppressWarnings("MultipleStringLiterals")
 @Slf4j @RequiredArgsConstructor @RestController @RequestMapping("/links") public class LinksController {
     private final LinkService linkService;
 
@@ -41,8 +44,19 @@ import org.springframework.web.bind.annotation.RestController;
                                         schema = @Schema(implementation = ApiErrorResponse.class)))}) @GetMapping
     public ListLinksResponse getLinks(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
         log.info("Getting links for chat {}", tgChatId);
-        List<LinkResponse> links = linkService.findAllByUserId(new User(tgChatId)).stream()
-            .map(linkDto -> new LinkResponse(linkDto.getId(), linkDto.getUrl())).toList();
+
+        List<Link> rawLinks = linkService.findAllByUserId(new User(tgChatId));
+        List<LinkResponse> links = new ArrayList<>();
+        for (Link link : rawLinks) {
+            URI uri;
+            try {
+                uri = URI.create(link.getUrl());
+            } catch (final IllegalArgumentException | NullPointerException e) {
+                log.error("Unable to get URI {}", link.getUrl());
+                uri = null;
+            }
+            links.add(new LinkResponse(link.getId(), uri));
+        }
         return new ListLinksResponse(links, links.size());
     }
 
@@ -61,8 +75,14 @@ import org.springframework.web.bind.annotation.RestController;
     ) {
         log.info("Adding link {} for chat {}", addLinkRequest.getLink(), id);
         linkService.add(new User(id), new Link(0L, addLinkRequest.getLink(), OffsetDateTime.now(), false));
-        return new LinkResponse(id, addLinkRequest.getLink());
-
+        URI uri;
+        try {
+            uri = URI.create(addLinkRequest.getLink());
+        } catch (final IllegalArgumentException | NullPointerException e) {
+            log.error("Unable to get URI {}", addLinkRequest.getLink());
+            uri = null;
+        }
+        return new LinkResponse(id, uri);
     }
 
     @Operation(summary = "Убрать отслеживание ссылки", description = "", tags = {}) @ApiResponses(value = {@ApiResponse(
@@ -84,7 +104,14 @@ import org.springframework.web.bind.annotation.RestController;
     ) {
         log.info("Removing link {} for chat {}", removeLinkRequest.getLink(), id);
         linkService.remove(new User(id), new Link(0L, removeLinkRequest.getLink(), null, false));
-        return new LinkResponse(id, removeLinkRequest.getLink());
+        URI uri;
+        try {
+            uri = URI.create(removeLinkRequest.getLink());
+        } catch (final IllegalArgumentException | NullPointerException e) {
+            log.error("Unable to get URI {}", removeLinkRequest.getLink());
+            uri = null;
+        }
+        return new LinkResponse(id, uri);
 
     }
 

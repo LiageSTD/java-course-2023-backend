@@ -3,7 +3,6 @@ package edu.java.bot.service;
 import edu.java.bot.client.scrapper.ScrapperClient;
 import edu.java.dto.scrapper.request.AddLinkRequest;
 import edu.java.dto.scrapper.request.RemoveLinkRequest;
-import edu.java.dto.scrapper.response.LinkResponse;
 import jakarta.validation.constraints.NotNull;
 import java.util.Collection;
 import lombok.AllArgsConstructor;
@@ -36,6 +35,8 @@ public class BotService {
     }
 
     public Collection<String> getLinks(long chatId) {
-        return scrapperClient.getAllLinks(chatId).getLinkResponse().stream().map(LinkResponse::getUrl).toList();
+        return scrapperClient.getAllLinks(chatId).getLinkResponse().stream()
+            .map(linkResponse -> "https://" + linkResponse.getUrl().getHost() + linkResponse.getUrl().getPath())
+            .toList();
     }
 }
