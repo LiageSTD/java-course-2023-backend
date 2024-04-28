@@ -1,5 +1,6 @@
 package edu.java.domain.jdbc;
 
+import edu.java.domain.JdbcLinkDao;
 import edu.java.dto.model.Link;
 import edu.java.scrapper.IntegrationTest;
 import java.time.OffsetDateTime;

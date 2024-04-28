@@ -1,5 +1,6 @@
 package edu.java.domain.jdbc;
 
+import edu.java.domain.JdbcChatDao;
 import edu.java.dto.model.User;
 import edu.java.scrapper.IntegrationTest;
 import java.util.List;

@@ -45,6 +45,7 @@ import lombok.Getter;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
               include = JsonTypeInfo.As.EXISTING_PROPERTY,
               property = "type",
+              visible = true,
               defaultImpl = Void.class)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = PushEvent.class, name = "PushEvent"),
