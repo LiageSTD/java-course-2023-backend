@@ -1,7 +1,6 @@
 package commandsHandler;
 
-import edu.java.bot.repository.UserRepository;
-import edu.java.bot.service.UserService;
+import edu.java.bot.service.BotService;
 import edu.java.bot.service.commandsHandler.CommandsHandler;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import edu.java.bot.service.commandsHandler.commands.StartHandler;
@@ -31,10 +30,11 @@ class CommandsHandlerTest {
     @Mock
     Update update;
     private CommandsHandler commandsHandler;
+    @Mock
+    private BotService userService;
 
     @BeforeEach
     void init() {
-        UserService userService = new UserService(new UserRepository());
         LinksHandler linksHandler = new LinksHandler(List.of(
             new GitHubLinkParser(),
             new StackOverFlowLinkParser()
@@ -56,6 +56,7 @@ class CommandsHandlerTest {
 
     @Test
     void checkNonRegisteredUser() {
+        Mockito.when(userService.isChatRegistered(1L)).thenReturn(false);
         Mockito.when(update.getMessage().getText()).thenReturn("/list");
         SendMessage reply = commandsHandler.handleTheMessage(update);
         Assertions.assertEquals(reply.getText(), "You have to register firstly. Use /start");
@@ -63,6 +64,7 @@ class CommandsHandlerTest {
 
     @Test
     void checkNonRegisteredUserToRegister() {
+        Mockito.when(userService.isChatRegistered(1L)).thenReturn(false);
         Mockito.when(update.getMessage().getText()).thenReturn("/start");
         SendMessage reply = commandsHandler.handleTheMessage(update);
         Assertions.assertEquals(reply.getText(), "Hi! Use /help to see what i can!");
@@ -70,6 +72,7 @@ class CommandsHandlerTest {
 
     @Test
     void checkUnknownCommand() {
+        Mockito.when(userService.isChatRegistered(1L)).thenReturn(true);
         Update update1 = new Update();
         Message message = new Message();
         message.setText("/start");
