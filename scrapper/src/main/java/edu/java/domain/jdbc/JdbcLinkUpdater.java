@@ -113,9 +113,15 @@ public class JdbcLinkUpdater implements LinkUpdater {
         for (EventsResponse event : events) {
             if (event != null) {
                 if (event.getCreatedAt().isAfter(link.getUpdatedAt())) {
+                    String description = switch (event) {
+                        case EventsResponse.PullRequest i -> "New pull request";
+                        case EventsResponse.CreateEvent i -> "New create event";
+                        case EventsResponse.Push i -> "New push event";
+                        default -> "New activity";
+                    };
                     sendNotification(
                         link,
-                        event instanceof EventsResponse.PullRequest ? "New pull request" : "New activity"
+                        description
                     );
                     return true;
                 }
