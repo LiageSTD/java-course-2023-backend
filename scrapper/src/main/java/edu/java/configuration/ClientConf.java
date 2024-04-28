@@ -25,6 +25,14 @@ public class ClientConf {
     }
 
     public static WebClient makeClient(String url, String jsonCT, String apiVer) {
+        if (applicationConfig == null) {
+            return WebClient.builder()
+                .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(16 * 1024 * 1024))
+                .baseUrl(url)
+                .defaultHeader("Content-Type", jsonCT)
+                .defaultHeader("Accept", apiVer)
+                .build();
+        }
         return WebClient.builder()
             .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(applicationConfig.webClientMaxInMemorySize()))
             .baseUrl(url)

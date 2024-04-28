@@ -74,7 +74,7 @@ public class JdbcLinkUpdater implements LinkUpdater {
             URI uri = new URI(link.getUrl());
             String path = uri.getPath();
             String[] parts = path.split("/");
-            qID = parts[1];
+            qID = parts[2];
         } catch (URISyntaxException e) {
             log.error("Malformed URL: {}", link.getUrl());
             processUnupdatableLink(link);

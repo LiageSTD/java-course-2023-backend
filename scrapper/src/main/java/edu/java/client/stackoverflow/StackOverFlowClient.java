@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
 
 public interface StackOverFlowClient {
-    @GetExchange("questions/{id}")
+    @GetExchange("questions/{id}?site=stackoverflow")
     QuestionEventResponse getQuestions(
         @PathVariable("id") String qId
     );
