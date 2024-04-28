@@ -1,7 +1,6 @@
 package commandsHandler.commands;
 
-import edu.java.bot.repository.UserRepository;
-import edu.java.bot.service.UserService;
+import edu.java.bot.service.BotService;
 import edu.java.bot.service.commandsHandler.commands.HelpHandler;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import edu.java.bot.service.commandsHandler.commands.StartHandler;
@@ -29,20 +28,19 @@ public class HelpHandlerTest {
     @Mock
     Update update;
     @Mock
-    private UserService userService;
+    private BotService botService;
 
     @BeforeEach
     void init() {
-        UserService userService = new UserService(new UserRepository());
         LinksHandler linksHandler = new LinksHandler(List.of(
             new GitHubLinkParser(),
             new StackOverFlowLinkParser()
         ));
         helpHandler = new HelpHandler(List.of(
-            new ListHandler(userService),
-            new StartHandler(userService),
-            new TrackHandler(userService, linksHandler),
-            new UntrackHandler(userService, linksHandler)
+            new ListHandler(botService),
+            new StartHandler(botService),
+            new TrackHandler(botService, linksHandler),
+            new UntrackHandler(botService, linksHandler)
         ));
         Mockito.when(update.getMessage()).thenReturn(mock(Message.class));
         Mockito.when(update.getMessage().getChat()).thenReturn(mock(Chat.class));

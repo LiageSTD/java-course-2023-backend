@@ -34,7 +34,7 @@ class StackOverFlowTest {
 
     @Test
     void testStackOverFlow() {
-        stubFor(get("/questions/322")
+        stubFor(get("/questions/322?site=stackoverflow")
             .willReturn(aResponse()
                 .withStatus(200)
                 .withBody("{\n" +

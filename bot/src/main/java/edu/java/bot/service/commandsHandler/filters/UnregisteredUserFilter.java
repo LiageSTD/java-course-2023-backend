@@ -1,6 +1,6 @@
 package edu.java.bot.service.commandsHandler.filters;
 
-import edu.java.bot.service.UserService;
+import edu.java.bot.service.BotService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 @AllArgsConstructor
 public class UnregisteredUserFilter implements Filter {
-    private final UserService userService;
+    private final BotService botService;
 
     @Override
     public SendMessage handle(Update update) {
@@ -26,6 +26,6 @@ public class UnregisteredUserFilter implements Filter {
     @Override
     public boolean fits(Update update) {
         Long id = update.getMessage().getChat().getId();
-        return userService.containsUserId(id) || update.getMessage().getText().startsWith("/start");
+        return botService.isChatRegistered(id) || update.getMessage().getText().startsWith("/start");
     }
 }

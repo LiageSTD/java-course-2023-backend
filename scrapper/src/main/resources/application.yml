@@ -1,15 +1,25 @@
 app:
   scheduler:
     enable: true
-    interval: 10s
+    interval: 60s
     force-check-delay: 10s
-
+  webClientMaxInMemorySize: 16777216
 spring:
   application:
     name: scrapper
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scrapper
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: postgres
 
 server:
   port: 8080
 
 logging:
   config: classpath:log4j2-plain.xml
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

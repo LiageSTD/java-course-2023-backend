@@ -23,4 +23,5 @@ public interface LinkParser {
     default boolean supports(String host) {
         return host.contains(getHost());
     }
+
 }
