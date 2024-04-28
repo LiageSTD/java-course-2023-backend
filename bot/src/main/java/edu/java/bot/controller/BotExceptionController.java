@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
             "Exception occurred due to your body style";
         return ResponseEntity.badRequest().body(new ApiErrorResponse(
             description,
-            "1",
+            "400",
             e.getClass().getName(),
             e.getMessage(),
             Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).toList()
