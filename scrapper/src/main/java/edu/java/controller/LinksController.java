@@ -1,6 +1,5 @@
 package edu.java.controller;
 
-import edu.java.service.databaseAccess.LinkService;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
 import edu.java.dto.scrapper.request.AddLinkRequest;
@@ -8,6 +7,7 @@ import edu.java.dto.scrapper.request.RemoveLinkRequest;
 import edu.java.dto.scrapper.response.ApiErrorResponse;
 import edu.java.dto.scrapper.response.LinkResponse;
 import edu.java.dto.scrapper.response.ListLinksResponse;
+import edu.java.service.databaseAccess.LinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

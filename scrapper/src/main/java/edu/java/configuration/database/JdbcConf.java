@@ -17,18 +17,22 @@ public class JdbcConf {
     public JdbcChatDao chatDao(JdbcTemplate jdbcTemplate) {
         return new JdbcChatDao(jdbcTemplate);
     }
+
     @Bean
     public JdbcLinkDao linkDao(JdbcTemplate jdbcTemplate) {
         return new JdbcLinkDao(jdbcTemplate);
     }
+
     @Bean
     public JdbcChatLinkDao chatLinkDao(JdbcTemplate jdbcTemplate) {
         return new JdbcChatLinkDao(jdbcTemplate);
     }
+
     @Bean
     public JdbcChatService chatService(JdbcChatDao chatDao, JdbcChatLinkDao chatLinkDao) {
         return new JdbcChatService(chatDao, chatLinkDao);
     }
+
     @Bean
     public JdbcLinkService linkService(JdbcLinkDao linkDao, JdbcChatLinkDao chatLinkDao) {
         return new JdbcLinkService(linkDao, chatLinkDao);

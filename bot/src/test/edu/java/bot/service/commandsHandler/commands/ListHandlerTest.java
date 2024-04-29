@@ -1,7 +1,6 @@
 package edu.java.bot.service.commandsHandler.commands;
 
 import edu.java.bot.service.BotService;
-import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

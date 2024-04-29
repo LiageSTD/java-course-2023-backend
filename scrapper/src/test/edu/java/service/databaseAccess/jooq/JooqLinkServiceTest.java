@@ -3,6 +3,7 @@ package edu.java.service.databaseAccess.jooq;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
 import edu.java.scrapper.IntegrationTest;
+import java.time.OffsetDateTime;
 import org.jooq.DSLContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.OffsetDateTime;
-import static edu.java.domain.jooq.model.tables.Link.LINK;
 import static edu.java.domain.jooq.model.tables.ChatLink.CHAT_LINK;
+import static edu.java.domain.jooq.model.tables.Link.LINK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest

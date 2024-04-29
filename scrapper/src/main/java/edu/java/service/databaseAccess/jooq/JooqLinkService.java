@@ -5,15 +5,16 @@ import edu.java.domain.jooq.JooqLinkDao;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
 import edu.java.service.databaseAccess.LinkService;
-import lombok.RequiredArgsConstructor;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JooqLinkService implements LinkService {
-    private final JooqLinkDao   jooqLinkDao;
+    private final JooqLinkDao jooqLinkDao;
     private final JooqChatLinkDao jooqChatLinkDao;
+
     @Override
     public Link add(User user, Link link) {
         if (jooqLinkDao.exists(link.getUrl())) {
@@ -30,7 +31,7 @@ public class JooqLinkService implements LinkService {
 
     @Override
     public Link remove(User user, Link link) {
-        Link linkInDb =  findByUrl(link.getUrl());
+        Link linkInDb = findByUrl(link.getUrl());
         if (linkInDb != null) {
             jooqChatLinkDao.remove(user.id, linkInDb.getId());
             if (jooqChatLinkDao.getUserIdsByLink(linkInDb.getId()).length == 0) {

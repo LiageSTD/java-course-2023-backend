@@ -2,8 +2,8 @@ package edu.java.service.databaseAccess.jdbc;
 
 import edu.java.domain.daoModel.UsersLinksDao;
 import edu.java.domain.jdbc.JdbcChatDao;
-import edu.java.service.databaseAccess.ChatService;
 import edu.java.dto.model.User;
+import edu.java.service.databaseAccess.ChatService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,6 @@ public class JdbcChatService implements ChatService {
     public void remove(User user) {
         chatDao.remove(user.id);
     }
-
 
     @Override
     public List<User> getAll() {

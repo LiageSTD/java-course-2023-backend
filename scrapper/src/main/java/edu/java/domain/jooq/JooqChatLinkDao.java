@@ -3,7 +3,6 @@ package edu.java.domain.jooq;
 import edu.java.domain.daoModel.UsersLinksDao;
 import edu.java.domain.jooq.model.tables.records.ChatLinkRecord;
 import edu.java.dto.model.Link;
-import edu.java.dto.model.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

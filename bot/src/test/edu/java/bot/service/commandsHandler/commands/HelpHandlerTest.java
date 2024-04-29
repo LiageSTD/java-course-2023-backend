@@ -1,11 +1,6 @@
 package edu.java.bot.service.commandsHandler.commands;
 
 import edu.java.bot.service.BotService;
-import edu.java.bot.service.commandsHandler.commands.HelpHandler;
-import edu.java.bot.service.commandsHandler.commands.ListHandler;
-import edu.java.bot.service.commandsHandler.commands.StartHandler;
-import edu.java.bot.service.commandsHandler.commands.TrackHandler;
-import edu.java.bot.service.commandsHandler.commands.UntrackHandler;
 import edu.java.bot.service.linksHandler.LinksHandler;
 import edu.java.bot.service.linksHandler.parsers.GitHubLinkParser;
 import edu.java.bot.service.linksHandler.parsers.StackOverFlowLinkParser;

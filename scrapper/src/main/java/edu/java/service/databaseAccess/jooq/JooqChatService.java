@@ -1,16 +1,18 @@
 package edu.java.service.databaseAccess.jooq;
+
 import edu.java.domain.jooq.JooqChatDao;
 import edu.java.domain.jooq.JooqChatLinkDao;
 import edu.java.dto.model.User;
 import edu.java.service.databaseAccess.ChatService;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JooqChatService implements ChatService {
 
     private final JooqChatDao jooqChatDao;
     private final JooqChatLinkDao jooqChatLinkDao;
+
     @Override
     public User add(User user) {
         return jooqChatDao.add(user.id) ? user : null;
@@ -20,7 +22,6 @@ public class JooqChatService implements ChatService {
     public void remove(User user) {
         jooqChatDao.remove(user.id);
     }
-
 
     @Override
     public List<User> getAll() {

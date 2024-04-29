@@ -3,11 +3,10 @@ package edu.java.domain.jdbc;
 import edu.java.domain.daoModel.ChatDao;
 import edu.java.dto.model.User;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor

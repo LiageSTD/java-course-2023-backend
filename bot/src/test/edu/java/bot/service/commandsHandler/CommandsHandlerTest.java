@@ -1,7 +1,6 @@
 package edu.java.bot.service.commandsHandler;
 
 import edu.java.bot.service.BotService;
-import edu.java.bot.service.commandsHandler.CommandsHandler;
 import edu.java.bot.service.commandsHandler.commands.ListHandler;
 import edu.java.bot.service.commandsHandler.commands.StartHandler;
 import edu.java.bot.service.commandsHandler.commands.TrackHandler;

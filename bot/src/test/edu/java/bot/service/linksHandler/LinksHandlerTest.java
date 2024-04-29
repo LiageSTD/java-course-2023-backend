@@ -1,6 +1,5 @@
 package edu.java.bot.service.linksHandler;
 
-import edu.java.bot.service.linksHandler.LinksHandler;
 import edu.java.bot.service.linksHandler.links.GitHubLink;
 import edu.java.bot.service.linksHandler.links.StackOverFlowLink;
 import edu.java.bot.service.linksHandler.parsers.GitHubLinkParser;

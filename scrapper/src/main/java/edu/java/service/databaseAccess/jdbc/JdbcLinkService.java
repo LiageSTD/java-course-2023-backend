@@ -1,17 +1,14 @@
 package edu.java.service.databaseAccess.jdbc;
 
-import edu.java.domain.daoModel.LinksDao;
-import edu.java.domain.daoModel.UsersLinksDao;
 import edu.java.domain.jdbc.JdbcChatLinkDao;
 import edu.java.domain.jdbc.JdbcLinkDao;
-import edu.java.service.databaseAccess.LinkService;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
+import edu.java.service.databaseAccess.LinkService;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor

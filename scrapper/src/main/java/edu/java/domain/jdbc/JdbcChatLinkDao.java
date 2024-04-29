@@ -2,7 +2,6 @@ package edu.java.domain.jdbc;
 
 import edu.java.domain.daoModel.UsersLinksDao;
 import edu.java.dto.model.Link;
-import edu.java.dto.model.User;
 import java.time.ZoneId;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
