@@ -6,14 +6,13 @@ import edu.java.domain.jpa.model.Chat;
 import edu.java.domain.jpa.model.Link;
 import edu.java.dto.model.User;
 import edu.java.service.databaseAccess.LinkService;
-import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.Nullable;
-
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.Nullable;
 
 @RequiredArgsConstructor
 public class JpaLinkService implements LinkService {
@@ -41,10 +40,12 @@ public class JpaLinkService implements LinkService {
         }
         chat.getLinks().add(linkInDb);
         chatDao.save(chat);
-        return new edu.java.dto.model.Link(linkInDb.getId(),
+        return new edu.java.dto.model.Link(
+            linkInDb.getId(),
             linkInDb.getUrl(),
             linkInDb.getUpdatedAt(),
-            linkInDb.getUnableToUpdate());
+            linkInDb.getUnableToUpdate()
+        );
     }
 
     @Override
@@ -56,10 +57,12 @@ public class JpaLinkService implements LinkService {
         }
         chat.getLinks().remove(linkInDb);
         chatDao.save(chat);
-        return new edu.java.dto.model.Link(linkInDb.getId(),
+        return new edu.java.dto.model.Link(
+            linkInDb.getId(),
             linkInDb.getUrl(),
             linkInDb.getUpdatedAt(),
-            linkInDb.getUnableToUpdate());
+            linkInDb.getUnableToUpdate()
+        );
     }
 
     @Override
@@ -72,10 +75,12 @@ public class JpaLinkService implements LinkService {
         linkInDb.setUnableToUpdate(link.isUnableToUpdate());
         linkInDb.setUpdatedAt(OffsetDateTime.now());
         linkDao.save(linkInDb);
-        return new edu.java.dto.model.Link(linkInDb.getId(),
+        return new edu.java.dto.model.Link(
+            linkInDb.getId(),
             linkInDb.getUrl(),
             linkInDb.getUpdatedAt(),
-            linkInDb.getUnableToUpdate());
+            linkInDb.getUnableToUpdate()
+        );
     }
 
     @Override
@@ -83,10 +88,12 @@ public class JpaLinkService implements LinkService {
         return chatDao.findById(user.id)
             .map(Chat::getLinks)
             .map(links -> links.stream()
-                .map(link -> new edu.java.dto.model.Link(link.getId(),
+                .map(link -> new edu.java.dto.model.Link(
+                    link.getId(),
                     link.getUrl(),
                     link.getUpdatedAt(),
-                    link.getUnableToUpdate()))
+                    link.getUnableToUpdate()
+                ))
                 .toList()
             ).orElse(List.of());
     }
@@ -95,30 +102,36 @@ public class JpaLinkService implements LinkService {
     @Override
     public edu.java.dto.model.Link findByUrl(String url) {
         return linkDao.findByUrl(url)
-            .map(link -> new edu.java.dto.model.Link(link.getId(),
+            .map(link -> new edu.java.dto.model.Link(
+                link.getId(),
                 link.getUrl(),
                 link.getUpdatedAt(),
-                link.getUnableToUpdate()))
+                link.getUnableToUpdate()
+            ))
             .orElse(null);
     }
 
     @Override
     public edu.java.dto.model.Link findById(User user) {
         return linkDao.findById(user.getId())
-            .map(link -> new edu.java.dto.model.Link(link.getId(),
+            .map(link -> new edu.java.dto.model.Link(
+                link.getId(),
                 link.getUrl(),
                 link.getUpdatedAt(),
-                link.getUnableToUpdate()))
+                link.getUnableToUpdate()
+            ))
             .orElse(null);
     }
 
     @Override
     public Collection<edu.java.dto.model.Link> listAllByTime(OffsetDateTime updatedAt) {
         return linkDao.findAllByUpdatedAtBefore(updatedAt).stream()
-            .map(link -> new edu.java.dto.model.Link(link.getId(),
+            .map(link -> new edu.java.dto.model.Link(
+                link.getId(),
                 link.getUrl(),
                 link.getUpdatedAt(),
-                link.getUnableToUpdate()))
+                link.getUnableToUpdate()
+            ))
             .toList();
     }
 }

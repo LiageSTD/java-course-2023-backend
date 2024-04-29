@@ -4,8 +4,8 @@ import edu.java.domain.jpa.JpaChatDao;
 import edu.java.domain.jpa.model.Chat;
 import edu.java.dto.model.User;
 import edu.java.service.databaseAccess.ChatService;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JpaChatService implements ChatService {
@@ -34,9 +34,9 @@ public class JpaChatService implements ChatService {
     @Override
     public long[] getUsersByLink(long linkId) {
         return chatDao.findAll().stream()
-                .filter(chat -> chat.getLinks().stream().anyMatch(link -> link.getId() == linkId))
-                .mapToLong(Chat::getId)
-                .toArray();
+            .filter(chat -> chat.getLinks().stream().anyMatch(link -> link.getId() == linkId))
+            .mapToLong(Chat::getId)
+            .toArray();
     }
 
     @Override

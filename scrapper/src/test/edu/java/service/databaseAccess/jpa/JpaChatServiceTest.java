@@ -2,13 +2,13 @@ package edu.java.service.databaseAccess.jpa;
 
 import edu.java.dto.model.User;
 import edu.java.scrapper.IntegrationTest;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,6 +29,7 @@ class JpaChatServiceTest extends IntegrationTest {
         assertEquals(1, users.size());
         assertEquals(user.id, users.get(0).id);
     }
+
     @Test
     @Transactional
     @Rollback
@@ -39,6 +40,7 @@ class JpaChatServiceTest extends IntegrationTest {
         List<User> users = jpaChatService.getAll();
         assertEquals(0, users.size());
     }
+
     @Test
     @Transactional
     @Rollback
@@ -49,6 +51,7 @@ class JpaChatServiceTest extends IntegrationTest {
         jpaChatService.add(anotherUser);
         assertEquals(2, jpaChatService.getAll().size());
     }
+
     @Test
     @Transactional
     @Rollback
@@ -57,6 +60,7 @@ class JpaChatServiceTest extends IntegrationTest {
         jpaChatService.add(user);
         assertTrue(jpaChatService.exists(user.id));
     }
+
     @Test
     @Transactional
     @Rollback
