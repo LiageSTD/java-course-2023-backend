@@ -1,28 +1,27 @@
 package edu.java.domain.jdbc;
 
-import edu.java.domain.dao.UsersDao;
+import edu.java.domain.daoModel.ChatDao;
 import edu.java.dto.model.User;
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class JdbcChatDao implements UsersDao {
+public class JdbcChatDao implements ChatDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    @Transactional
-    public boolean add(User user) {
-        return jdbcTemplate.update("INSERT INTO chat (id) VALUES (?)", user.id) > 0;
+    public boolean add(Long userId) {
+        return jdbcTemplate.update("INSERT INTO chat (id) VALUES (?)", userId) > 0;
     }
 
     @Override
-    public void remove(User user) {
-        jdbcTemplate.update("DELETE FROM chat WHERE id = ?", user.id);
+    public void remove(Long userId) {
+        jdbcTemplate.update("DELETE FROM chat WHERE id = ?", userId);
     }
 
     @Override

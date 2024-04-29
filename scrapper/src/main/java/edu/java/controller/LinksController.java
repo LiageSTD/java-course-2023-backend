@@ -1,6 +1,6 @@
 package edu.java.controller;
 
-import edu.java.domain.jdbc.LinkService;
+import edu.java.service.databaseAccess.LinkService;
 import edu.java.dto.model.Link;
 import edu.java.dto.model.User;
 import edu.java.dto.scrapper.request.AddLinkRequest;

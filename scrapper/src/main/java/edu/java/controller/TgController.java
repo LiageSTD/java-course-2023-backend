@@ -1,6 +1,6 @@
 package edu.java.controller;
 
-import edu.java.domain.jdbc.ChatService;
+import edu.java.service.databaseAccess.ChatService;
 import edu.java.dto.model.User;
 import edu.java.dto.scrapper.response.ApiErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;

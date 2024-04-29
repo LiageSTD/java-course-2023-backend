@@ -1,6 +1,6 @@
 package edu.java.domain.jdbc;
 
-import edu.java.domain.dao.LinksDao;
+import edu.java.domain.daoModel.LinksDao;
 import edu.java.dto.model.Link;
 import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,68 +20,67 @@ public class JdbcLinkDao implements LinksDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public Long add(Link link) {
+    public Long add(String url) {
         return jdbcTemplate.queryForObject(
-            "INSERT INTO link (url, updated_at, unable_to_update) VALUES (?, ?, ?) RETURNING id ",
+            "INSERT INTO link (url, updated_at, unable_to_update) VALUES (?, ?, ?) RETURNING id",
             Long.class,
-            link.getUrl(),
-            link.getUpdatedAt(),
-            link.isUnableToUpdate()
+            url,
+            OffsetDateTime.now(),
+            false
         );
     }
 
     @Override
-    public void remove(Link link) {
-        jdbcTemplate.update("DELETE FROM link WHERE id = ?", link.getId());
+    public void remove(String url) {
+        jdbcTemplate.update("DELETE FROM link WHERE url = ?", url);
     }
 
     @Override
     public List<@NotNull Link> getAll() {
-        return jdbcTemplate.query("SELECT * FROM link", (rs, rowNum) -> new Link(
-            rs.getLong("id"),
-            rs.getString("url"),
-            rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
-            rs.getBoolean("unable_to_update")
-        ));
+        try {
+            return jdbcTemplate.query("SELECT * FROM link", (rs, rowNum) -> new Link(
+                rs.getLong("id"),
+                rs.getString("url"),
+                rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
+                rs.getBoolean("unable_to_update")
+            ));
+        } catch (final EmptyResultDataAccessException ignored) {
+            return List.of();
+        }
     }
 
     @Override
     public Link findById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM link WHERE id = ?", (rs, rowNum) -> new Link(
-            rs.getLong("id"),
-            rs.getString("url"),
-            rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
-            rs.getBoolean("unable_to_update")
-        ), id);
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM link WHERE id = ?", (rs, rowNum) -> new Link(
+                rs.getLong("id"),
+                rs.getString("url"),
+                rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
+                rs.getBoolean("unable_to_update")
+            ), id);
+        } catch (final EmptyResultDataAccessException ignored) {
+            return null;
+        }
     }
 
     @Override
     public Link findByUrl(String url) {
-        return jdbcTemplate.queryForObject("SELECT * FROM link WHERE url = ?", (rs, rowNum) -> new Link(
-            rs.getLong("id"),
-            rs.getString("url"),
-            rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
-            rs.getBoolean("unable_to_update")
-        ), url);
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM link WHERE url = ?", (rs, rowNum) -> new Link(
+                rs.getLong("id"),
+                rs.getString("url"),
+                rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
+                rs.getBoolean("unable_to_update")
+            ), url);
+        } catch (final EmptyResultDataAccessException ignored) {
+            return null;
+        }
     }
 
     @Override
     public void update(Link link) {
         jdbcTemplate.update("UPDATE link SET url = ?, updated_at = ?, unable_to_update = ? WHERE id = ?", link.getUrl(),
             link.getUpdatedAt(), link.isUnableToUpdate(), link.getId()
-        );
-    }
-
-    @Override
-    public List<Link> findUnupdatable() {
-        return jdbcTemplate.query(
-            "SELECT * FROM link WHERE unable_to_update = true",
-            (rs, rowNum) -> new Link(
-                rs.getLong("id"),
-                rs.getString("url"),
-                rs.getTimestamp("updated_at").toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime(),
-                rs.getBoolean("unable_to_update")
-            )
         );
     }
 
@@ -100,8 +100,8 @@ public class JdbcLinkDao implements LinksDao {
     }
 
     @Override
-    public boolean exists(Link link) {
-        Long count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM link WHERE url = ?", Long.class, link.getUrl());
+    public boolean exists(String url) {
+        Long count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM link WHERE url = ?", Long.class, url);
         return count != null && count > 0;
     }
 }
