@@ -2,7 +2,7 @@ package edu.java.configuration;
 
 import edu.java.client.github.GithubClient;
 import edu.java.client.stackoverflow.StackOverFlowClient;
-import edu.java.service.LinkUpdaterService;
+import edu.java.service.linkUpdater.LinkUpdaterService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

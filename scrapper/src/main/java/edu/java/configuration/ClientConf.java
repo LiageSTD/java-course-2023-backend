@@ -6,6 +6,7 @@ import edu.java.client.stackoverflow.StackOverFlowClient;
 import edu.java.configuration.apiConfs.BotClientConf;
 import edu.java.configuration.apiConfs.GithubApiConf;
 import edu.java.configuration.apiConfs.StackOverFlowApiConf;
+import edu.java.configuration.database.AccessType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @EnableScheduling
 public class ClientConf {
     @SuppressWarnings("MagicNumber")
-    private static ApplicationConfig applicationConfig = new ApplicationConfig(null, 16 * 1024 * 1024);
+    private static ApplicationConfig applicationConfig = new ApplicationConfig(null, 16 * 1024 * 1024, AccessType.JOOQ);
     //Made only for tests. IDK how to fix this
 
     @Autowired

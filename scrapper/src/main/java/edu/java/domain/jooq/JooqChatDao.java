@@ -1,6 +1,6 @@
 package edu.java.domain.jooq;
 
-import edu.java.domain.dao.UsersDao;
+import edu.java.domain.daoModel.ChatDao;
 import edu.java.dto.model.User;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
@@ -13,20 +13,20 @@ import static edu.java.domain.jooq.model.Tables.CHAT;
 @Primary
 @Repository
 @RequiredArgsConstructor
-public class JooqChatDao implements UsersDao {
+public class JooqChatDao implements ChatDao {
     private final DSLContext dslContext;
 
     @Override
-    public boolean add(User user) {
+    public boolean add(Long userId) {
         return dslContext.insertInto(CHAT, CHAT.ID)
-            .values(user.getId())
+            .values(userId)
             .execute() > 0;
     }
 
     @Override
-    public void remove(User user) {
+    public void remove(Long userId) {
         dslContext.deleteFrom(CHAT)
-            .where(CHAT.ID.eq(user.getId()))
+            .where(CHAT.ID.eq(userId))
             .execute();
     }
 

@@ -1,6 +1,6 @@
 package edu.java.domain.jooq;
 
-import edu.java.domain.dao.LinksDao;
+import edu.java.domain.daoModel.LinksDao;
 import edu.java.domain.jooq.model.tables.records.LinkRecord;
 import edu.java.dto.model.Link;
 import jakarta.validation.constraints.NotNull;
@@ -23,18 +23,18 @@ public class JooqLinkDao implements LinksDao {
     private final DSLContext dslContext;
 
     @Override
-    public Long add(Link link) {
+    public Long add(String url) {
         return dslContext.insertInto(LINK, LINK.URL, LINK.UPDATED_AT, LINK.UNABLE_TO_UPDATE)
-            .values(link.getUrl(), link.getUpdatedAt(), link.isUnableToUpdate())
+            .values(url, OffsetDateTime.now(), false)
             .returning(LINK.ID)
             .fetchOne()
             .getId();
     }
 
     @Override
-    public void remove(Link link) {
+    public void remove(String url) {
         dslContext.deleteFrom(LINK)
-            .where(LINK.URL.eq(link.getUrl()))
+            .where(LINK.URL.eq(url))
             .execute();
     }
 
@@ -92,20 +92,6 @@ public class JooqLinkDao implements LinksDao {
 
     @Nullable
     @Override
-    public List<Link> findUnupdatable() {
-        return dslContext.selectFrom(LINK)
-            .where(LINK.UNABLE_TO_UPDATE.eq(true))
-            .fetch()
-            .map(recordS -> new Link(
-                recordS.get(LINK.ID),
-                recordS.get(LINK.URL),
-                recordS.get(LINK.UPDATED_AT),
-                recordS.get(LINK.UNABLE_TO_UPDATE)
-            ));
-    }
-
-    @Nullable
-    @Override
     public Collection<Link> listAllByTime(OffsetDateTime updatedAt) {
         @NotNull Result<LinkRecord> records = dslContext.selectFrom(LINK)
             .where(LINK.UPDATED_AT.lessThan(updatedAt))
@@ -122,11 +108,11 @@ public class JooqLinkDao implements LinksDao {
     }
 
     @Override
-    public boolean exists(Link link) {
+    public boolean exists(String url) {
         return dslContext.fetchExists(
             dslContext.selectOne()
                 .from(LINK)
-                .where(LINK.URL.eq(link.getUrl()))
+                .where(LINK.URL.eq(url))
         );
     }
 }

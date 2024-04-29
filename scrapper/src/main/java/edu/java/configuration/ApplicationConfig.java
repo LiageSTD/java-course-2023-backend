@@ -1,5 +1,6 @@
 package edu.java.configuration;
 
+import edu.java.configuration.database.AccessType;
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,7 +12,8 @@ import org.springframework.validation.annotation.Validated;
 public record ApplicationConfig(
 
     @NotNull Scheduler scheduler,
-    @NotNull Integer webClientMaxInMemorySize) {
+    @NotNull Integer webClientMaxInMemorySize,
+    @NotNull AccessType databaseAccessType) {
     @Bean public Scheduler scheduler() {
         return scheduler;
     }
@@ -22,4 +24,5 @@ public record ApplicationConfig(
 
     public record Scheduler(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
     }
+
 }

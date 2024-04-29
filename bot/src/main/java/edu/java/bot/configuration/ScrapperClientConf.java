@@ -20,15 +20,15 @@ public class ScrapperClientConf {
         return clientFactory.createClient(clientClass);
     }
 
-    public ScrapperClient botClient(String botUrl) {
+    public ScrapperClient scrapperClient(String botUrl) {
         return createClient(ScrapperClient.class, Map.of(
-            "Content-Type", edu.java.bot.client.scrapper.ScrapperClientConf.CONTENT_TYPE,
-            "Accept", edu.java.bot.client.scrapper.ScrapperClientConf.ACCEPT
+            "Content-Type", edu.java.bot.configuration.apiConf.ScrapperClientConf.CONTENT_TYPE,
+            "Accept", edu.java.bot.configuration.apiConf.ScrapperClientConf.ACCEPT
         ), botUrl);
     }
 
     @Bean
-    public ScrapperClient botClient() {
-        return botClient(edu.java.bot.client.scrapper.ScrapperClientConf.API_URL);
+    public ScrapperClient scrapperClient() {
+        return scrapperClient(edu.java.bot.configuration.apiConf.ScrapperClientConf.API_URL);
     }
 }
