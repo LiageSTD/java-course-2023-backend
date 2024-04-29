@@ -4,7 +4,7 @@ app:
     interval: 60s
     force-check-delay: 10s
   webClientMaxInMemorySize: 16777216
-  database-access-type: JOOQ
+  database-access-type: JPA
 spring:
   application:
     name: scrapper
